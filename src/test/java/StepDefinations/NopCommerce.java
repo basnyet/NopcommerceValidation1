@@ -7,6 +7,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.IOException;
 import java.util.Iterator;
@@ -23,9 +24,6 @@ public class NopCommerce extends BaseClass {
 
         System.setProperty(PathStore.BROWSER_NAME_C, PathStore.CHROME_DRIVER_PATH);
         this.driver = new ChromeDriver();
-
-        //driver= SwitchBrowsers.getbrowser();
-
 
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
@@ -116,6 +114,7 @@ public class NopCommerce extends BaseClass {
     public void user_click_Add_new_button() {
 
 
+
         cp.getClick_Add_new();
 
     }
@@ -123,8 +122,19 @@ public class NopCommerce extends BaseClass {
     @Then("User can view add new customer page")
     public void user_can_view_add_new_customer_page() throws InterruptedException, IOException {
         Thread.sleep(2000);
+       // cp.Pannel_heading();
+
+        WebElement info =   driver.findElement(By.xpath("//div[@class=\"panel-heading\"]"));
+
+        if(info.equals(  driver.findElement(By.xpath("//div[@class=\"panel-heading\"]")))){
+            driver.findElement(By.xpath("//div[@class=\"panel-heading\"]")).click();
+        }  else {
+            driver.findElement(By.xpath("//div[@class=\"panel-heading opened\"]"));
+        }
+        Thread.sleep(2000);
         driver.getTitle();
         Assert.assertEquals("Add a new customer / nopCommerce administration", driver.getTitle());
+        Assert.assertTrue(true);
         ScreenShot.Capture(driver, "New Customer Page Title");
 
     }
@@ -197,7 +207,7 @@ public class NopCommerce extends BaseClass {
     @Then("User can view conformation massage {string}")
     public void user_can_view_conformation_massage(String massage) throws InterruptedException, IOException {
 
-        Assert.assertTrue(true);
+        Assert.assertTrue("The new customer has been added successfully.", true);
         ScreenShot.Capture(driver, "Conformation Massage");
 
     }
@@ -221,6 +231,7 @@ public class NopCommerce extends BaseClass {
         Thread.sleep(2000);
         driver.getPageSource().contains("Your store. Login");
         Assert.assertEquals(title, driver.getTitle());
+
     }
 
     @Then("User can see page title {string}")
@@ -240,7 +251,7 @@ public class NopCommerce extends BaseClass {
         driver.quit();
 
     }
-
+//------------------Add shipping-----------------------------------------
     @Then("User click Configuration menu")
     public void user_click_Configuration_menu() throws InterruptedException {
 
@@ -307,7 +318,7 @@ public class NopCommerce extends BaseClass {
     public void user_can_see_conformation_page(String conformation) throws InterruptedException, IOException {
 
         Thread.sleep(2000);
-        Assert.assertTrue(true);
+        Assert.assertTrue("The new warehouse has been added successfully.", true);
         ScreenShot.Capture(driver, "conformation page");
 
     }
@@ -336,18 +347,28 @@ public class NopCommerce extends BaseClass {
 
     @Then("User Click View to see the detail of this order")
     public void user_Click_View_to_see_the_detail_of_this_order() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         salesPages.Click_View().click();
 
     }
 
     @Then("User click Change Status for status change")
     public void user_click_Change_Status_for_status_change() throws InterruptedException {
+        Thread.sleep(5000);
 
-        Thread.sleep(2000);
+
+        WebElement info =   driver.findElement(By.xpath("//div[@class=\"panel-heading\"]"));
+
+        if(info.equals(  driver.findElement(By.xpath("//div[@class=\"panel-heading\"]")))){
+             driver.findElement(By.xpath("//div[@class=\"panel-heading\"]")).click();
+        }  else driver.findElement(By.xpath("//div[@class=\"panel-heading opened\"]"));
+
+
+        Thread.sleep(3000);
         salesPages.Click_ChangeStatus().click();
+        }
 
-    }
+
 
     @Given("User click the box and choose the option")
     public void user_click_the_box_and_choose_the_option() throws InterruptedException {
@@ -425,7 +446,8 @@ public class NopCommerce extends BaseClass {
     }
 
     @Then("user click Add order note")
-    public void user_click_Add_order_note() {
+    public void user_click_Add_order_note() throws InterruptedException {
+        Thread.sleep(3000);
         salesPages.Add_OrderNote();
 
     }
@@ -447,8 +469,8 @@ public class NopCommerce extends BaseClass {
 
     @Then("User Upload file")
     public void user_Upload_file() throws InterruptedException {
-      //  Thread.sleep(3000);
-     //   salesPages.Upload_File();
+        Thread.sleep(3000);
+        salesPages.Upload_File();
 
     }
 

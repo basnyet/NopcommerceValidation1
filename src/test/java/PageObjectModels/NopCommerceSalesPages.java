@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import static org.testng.reporters.jq.BasePanel.C;
-
 public class NopCommerceSalesPages {
 
     WebDriver driver;
@@ -49,12 +47,20 @@ public class NopCommerceSalesPages {
         return Click_View;
     }
 
+//    @FindBy(xpath = ("//i[@class=\"toggle-icon fa fa-plus\"]"))
+//    WebElement Click_Info;
+    public void Click_Info(){
+        driver.findElement(By.className("panel-heading")).click();
+       // return Click_Info;
+    }
+
     @FindBy(name = ("btnChangeOrderStatus"))
     WebElement Click_ChangeStatus;
 
     public WebElement Click_ChangeStatus() {
         return Click_ChangeStatus;
     }
+
 
     @FindBy(id = ("OrderStatusId"))
     WebElement Click_SelectOption;
@@ -112,7 +118,7 @@ public class NopCommerceSalesPages {
     }
 
     public void Upload_File() {
-        driver.findElement(By.name("qqfile")).sendKeys("C:\\Users\\basny_gg\\OneDrive\\Documents.png");
+        driver.findElement(By.name("qqfile")).sendKeys("C:\\Users\\basny_gg\\Downloads\\importData.csv");
     }
 
 
